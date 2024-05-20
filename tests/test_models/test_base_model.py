@@ -13,7 +13,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_initialization(self):
         """Testing initialization"""
-        self.assetIsInstance(self.base_inst.id, str)
+        self.assertIsInstance(self.base_inst.id, str)
         self.assertIsInstance(self.base_inst.created_at, datetime)
         self.assertIsInstance(self.base_inst.updated_at, datetime)
 
