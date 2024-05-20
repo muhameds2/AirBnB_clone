@@ -1,10 +1,17 @@
+#!/usr/bin/python3
+"""
+base_model.py: defines the BaseModel class
+"""
 import uuid
 from datetime import datetime
 
 
 class BaseModel:
+    """Base class for all future classes"""
+
     def __init__(self, *args, **kwargs):
-        # Initialize the instance with attributes provided in kwargs, if any
+        """Initialize the instance with attributes
+        provided in kwargs, if any"""
 
         if kwargs is not None:
             for key, value in kwargs.items():
@@ -28,7 +35,7 @@ class BaseModel:
         self.updated_at = datetime.now()
 
     def __str__(self):
-        # Provide a readable representation of the instance
+        """Provide a readable representation of the instance"""
         Basemodel = self.__class__.__name__
         return f"[{Basemodel}] ({self.id}) {self.__dict__}"
         """The following line is an alternative
@@ -37,7 +44,7 @@ class BaseModel:
             format(self.__class__.__name__, self.id, self.__dict__)"""
 
     def save(self):
-        # Update the updated_at timestamp to the current time
+        """Update the updated_at timestamp to the current time"""
         self.updated_at = datetime.now()
 
     def to_dict(self):
