@@ -12,27 +12,17 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initialize the instance with attributes
         provided in kwargs, if any"""
-
-        if kwargs is not None:
-            for key, value in kwargs.items():
-                # Skip the __class__ attribute to avoid conflicts
-                if key == "__class__":
-                    continue
-                # Parse datetime attributes from string format
-                if key == "created_at":
-                    setattr(self, "created_at", datetime.strptime(
-                        value, "%Y-%m-%dT%H:%M:%S.%f"))
-                elif key == "updated_at":
-                    setattr(self, "updated_at", datetime.strptime(
-                        value, "%Y-%m-%dT%H:%M:%S.%f"))
-                else:
-                    setattr(self, key, value)
-        """Assign a unique ID, turn it into a
-        string format and initialize timestamps
-        """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+        if kwargs:
+             for key, value in kwargs.items():
+                # convert to datetime
+                if key in ['created_at', 'updated_at']:
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                # Parse datetime attributes from string format
+                if key != '__class__':
+                    setattr(self, key, value)
 
     def __str__(self):
         """Provide a readable representation of the instance"""
