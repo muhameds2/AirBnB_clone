@@ -2,7 +2,7 @@
 """This reprenets a module which is the file storage class"""
 import json
 import os
-import datetime
+#import datetime
 
 
 class FileStorage():
@@ -45,9 +45,9 @@ class FileStorage():
             with open(FileStorage.__file_path, "r", encoding="utf-8") \
                     as my_file:
                 object_dict = json.loads(my_file.read())
-            final_dict = {}
+            new_dict = {}
 
             for id, dictionary in object_dict.items():
                 class_name = dictionary['__class__']
-                final_dict[id] = self.classes()[class_name](**dictionary)
-            FileStorage.__objects = final_dict
+                new_dict[id] = self.classes()[class_name](**dictionary)
+            FileStorage.__objects = new_dict
